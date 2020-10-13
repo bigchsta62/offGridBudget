@@ -11,7 +11,7 @@ request.onupgradeneeded = function(event) {
 request.onsuccess = function(event) {
   db = event.target.result;
 
-  // check if app is online before reading from db
+  // check if network is working before reading from indexdb
   if (navigator.onLine) {
     checkDatabase();
   }
@@ -22,22 +22,22 @@ request.onerror = function(event) {
 };
 
 function saveRecord(record) {
-  // create a transaction on the pending db with readwrite access
+  // create pending transaction
   const transaction = db.transaction(["pending"], "readwrite");
 
-  // access your pending object store
+  //pending transction store
   const store = transaction.objectStore("pending");
 
-  // add record to your store with add method.
+  // add transaction
   store.add(record);
 }
 
 function checkDatabase() {
-  // open a transaction on your pending db
+  // open a transaction in indexdb
   const transaction = db.transaction(["pending"], "readwrite");
-  // access your pending object store
+  // access pending trasaction
   const store = transaction.objectStore("pending");
-  // get all records from store and set to a variable
+  // get all transactions and set to variable
   const getAll = store.getAll();
 
   getAll.onsuccess = function() {
@@ -52,13 +52,13 @@ function checkDatabase() {
       })
       .then(response => response.json())
       .then(() => {
-        // if successful, open a transaction on your pending db
+        // if successful, open a transaction in indexdb
         const transaction = db.transaction(["pending"], "readwrite");
 
-        // access your pending object store
+        // access pending trasaction store
         const store = transaction.objectStore("pending");
 
-        // clear all items in your store
+        // clear all transactions in indexdb
         store.clear();
       });
     }
