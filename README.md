@@ -6,8 +6,8 @@
 
 * [Installation](#installation)
 * [Usage](#usage)
-* [Tests](#tests)
 * [Contributing](#contributing)
+* [Tests](#tests)
 * [Questions](#questions)
 
 
