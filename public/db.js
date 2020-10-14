@@ -1,3 +1,6 @@
+//I borrowed this code from @ https://github.com/MarcusTravis
+//and modified it to work with my app.
+
 let db;
 // create a new db request for a "budget" database.
 const request = indexedDB.open("budget", 1);
@@ -18,7 +21,7 @@ request.onsuccess = function(event) {
 };
 
 request.onerror = function(event) {
-  console.log("Woops! " + event.target.errorCode);
+  console.log("Whoops! " + event.target.errorCode);
 };
 
 function saveRecord(record) {
